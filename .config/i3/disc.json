@@ -1,0 +1,49 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+        "height": 1008,
+        "width": 1860,
+        "x": 30,
+        "y": 40
+    },
+    "marks": [],
+    "name": "#anime | elated holiday feelings - Discord",
+    "percent": 0.7,
+    "swallows": [
+        {
+            "class": "^discord$",
+            // "instance": "^discord$"
+            // "machine": "^archon$",
+            "title": "Friends \\-\\ Discord"
+            // "window_role": "^browser\\-window$"
+        }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+        "height": 140,
+        "width": 1020,
+        "x": 0,
+        "y": 0
+    },
+    "marks": [],
+    "name": "nvim .config/pywal-discord/pywal-discord-default.css",
+    "percent": 0.3,
+    "swallows": [
+        {
+            "class": "^kitty$"
+            // "instance": "^kitty$",
+            // "machine": "^archon$",
+            // "title": "^nvim\\ \\.config\\/pywal\\-discord\\/pywal\\-discord\\-default\\.css$"
+        }
+    ],
+    "type": "con"
+}
