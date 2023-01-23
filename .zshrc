@@ -83,11 +83,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='nvim'
+ else
+   export EDITOR='vim'
+ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias hugod="hugo server -D --bind 10.0.0.42 --baseURL http://10.0.0.42"
-# alias nvim="~/.nvp"
+alias nvim="~/.nvp"
 alias zathura="~/.local/bin/zathura"
 source .kb_alias
 #
@@ -109,3 +109,5 @@ source .kb_alias
 (cat ~/.cache/wal/sequences &)
 source ~/.cache/wal/colors-tty.sh
 alias config='/usr/bin/git --git-dir=/home/kcalb/.cfg/ --work-tree=/home/kcalb'
+
+export VISUAL='nvim'

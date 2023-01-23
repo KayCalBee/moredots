@@ -7,3 +7,4 @@ i3-msg "workspace "3: disc"; append_layout ~/.config/i3/disc.json"
 #
 (discord-ptb &)
 (kitty &)
+(kitty -T scratch &)
