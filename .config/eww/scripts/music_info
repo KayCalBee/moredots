@@ -1,0 +1,15 @@
+#!/bin/bash
+
+## Data
+STATUS="$(playerctl status)"
+
+
+## Get Album Art URL
+get_alb_art(){
+  while STATUS == Playing
+    do
+      playerctl --follow metadata mpris:artUrl 2>/dev/null | while read arturl; do curl -s $arturl -o /tmp/cover.png
+    done
+  done
+  }
+

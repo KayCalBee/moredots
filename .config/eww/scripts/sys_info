@@ -1,0 +1,30 @@
+#!/bin/bash
+
+## Get CPU Usage
+get_cpu() {
+  printf "%.0f\n" $(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')
+}
+## Get Used Memory
+get_mem() {
+    printf "%.0f\n" $(free -m | grep Mem | awk '{print ($3/$2)*100}')
+  }
+
+## Get Battery
+get_bat() {
+  cat /sys/class/power_supply/BAT1/capacity
+}
+ ## Get Hard Drive Space
+get_hdd() {
+  df -Pk . | sed 1d | awk '{print $5}' | tr -d %
+}
+
+## Execute
+if [[ "$1" == "--cpu" ]]; then
+  get_cpu
+elif [[ "$1" == "--mem" ]]; then
+  get_mem
+elif [[ "$1" == "--bat" ]]; then
+  get_bat
+elif [[ "$1" == "--hdd" ]]; then
+  get_hdd
+fi

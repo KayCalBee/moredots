@@ -103,6 +103,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 alias hugod="hugo server -D --bind 10.0.0.42 --baseURL http://10.0.0.42"
 alias nvim="~/.nvp"
 alias zathura="~/.local/bin/zathura"
+alias kali="VirtualBoxVM --startvm kali --scaled &"
 source .kb_alias
 #
 # Pywal
@@ -111,3 +112,4 @@ source ~/.cache/wal/colors-tty.sh
 alias config='/usr/bin/git --git-dir=/home/kcalb/.cfg/ --work-tree=/home/kcalb'
 
 export VISUAL='nvim'
+export GTK_THEME='oomox-haishokutedark'

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+brightnessctl i | grep % | awk '{print$4}' | tr -d '()%'

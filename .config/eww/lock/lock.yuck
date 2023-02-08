@@ -1,0 +1,8 @@
+;; ===========
+;;     VAR
+;; ===========
+
+;; Music
+(deflisten LSON :initial "..." "playerctl --follow metadata --format '{{ trunc(title, 48) }}' || true")
+(deflisten LART :initial "..." "playerctl --follow metadata --format '{{ trunc(artist, 32) }}' || true")
+(deflisten LALB :initial "..." "playerctl --follow metadata --format '{{ trunc(album, 40) }}' || true")

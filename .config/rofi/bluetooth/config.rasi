@@ -1,0 +1,26 @@
+configuration {
+    location: 3;
+    fixed-num-lines: false;
+    steal-focus: true;
+  }
+
+  /* Theme */
+
+@import "~/.cache/wal/colors-rofi-dark"
+listview {
+    lines: 10;
+    dynamic: false;
+    fixed-height: true;
+    scrollbar: false;
+}
+
+window {
+  width: 10%;
+  padding: 1%;
+  y-offset: 56;
+  x-offset: -166;
+}
+
+inputbar {
+    enabled: false;
+}

@@ -1,0 +1,28 @@
+configuration {
+    location: 0;
+    font: "Inconsolata Nerd Font Mono 24";
+    fixed-num-lines: true;
+    steal-focus: true;
+  }
+
+  /* Theme */
+
+@import "~/.cache/wal/colors-rofi-dark"
+listview {
+    lines: 5;
+    scrollbar: false;
+  }
+
+element-text {
+ background-color: inherit;
+ text-color: inherit;
+}
+
+window {
+  width: 15%;
+  padding: 1%;
+}
+
+inputbar {
+    enabled: false;
+}

@@ -1,0 +1,632 @@
+; =====================
+;         VAR
+; =====================
+
+;; Fetch
+(defpoll distro :interval "12h" `hostnamectl | grep System | awk '{print $3}'`)
+(defpoll shell :interval "12h" `echo $SHELL | sed -e 's#/usr/bin/##'`)
+(defpoll uptime :interval "1m" "uptime -p | sed -e 's/up //;s/ hour,/h/;s/ minutes/m/;s/ hours,/h/;s/ minute/m/;s/ day,/d/;s/ days,/d/'")
+(defpoll packages :interval "10m" `ls /var/lib/pacman/local/ | wc -l`)
+(defpoll wm :interval "12h" `printenv | grep DESKTOP_SESSION | sed -e 's/DESKTOP_SESSION=//'`)
+
+;; Profile
+(defvar pfp "/home/kcalb/sites/static/me1.jpg")
+(defvar name "Antonio Ortiz")
+(defpoll username :interval "12h" `whoami`)
+(defpoll hostname :interval "12h" `hostnamectl | grep Static | awk '{print $3}'`)
+(defpoll machine :interval "12h" `hostnamectl | grep Model | awk '{print $3 " " $4}'`)
+
+;; Music
+(deflisten DSON :initial "..." "~/.config/eww/scripts/song_scroll")
+(deflisten DART :initial "..." "~/.config/eww/scripts/art_scroll")
+(deflisten DALB :initial "..." "~/.config/eww/scripts/alb_scroll")
+(deflisten COVER :initial "..." "~/.config/eww/scripts/get_cover")
+
+;; Sliders
+(defpoll VOL :interval "16ms" "~/.config/eww/scripts/get_vol")
+(defpoll BRI :interval "16ms" "~/.config/eww/scripts/get_bri")
+
+;; Clock / Date
+(defpoll HOUR :interval "10s" "date +%H")
+(defpoll MIN :interval "1s" "date +%M")
+(defpoll MONTH :interval "10h" "date +%b")
+(defpoll FULLMONTH :interval "15h" "date +%B")
+(defpoll YEAR :interval "15h" "date +%Y")
+(defpoll DAY :interval "5h" "date +%d")
+(defpoll DAYOF :interval "5h" "date +%A")
+
+; =====================
+;         WID
+; =====================
+
+;; Background
+(defwidget bg []
+        (box :class "bg")
+)
+
+;; System
+(defwidget system []
+        (box :class "genwin"
+             :vexpand "false"
+             :hexpand "false"
+          (box :orientation "v"
+               :spacing 20
+               :halign "center"
+               :valign "center"
+               :space-evenly "false"
+               :vexpand "false"
+               :hexpand "false"
+            (box :class "cpu_bar"
+                 :orientation "h"
+                 :spacing 20
+                 :space-evenly "false"
+                 :vexpand "false"
+                 :hexpand "false"
+              (label :class "iconcpu"
+                     :text ""
+              )
+              (scale :min 0
+                     :max 100
+                     :value {EWW_CPU["avg"]}
+                     :active "false"
+              )
+            )
+            (box :class "ram_bar"
+                 :orientation "h"
+                 :spacing 20
+                 :space-evenly "false"
+                 :vexpand "false"
+                 :hexpand "false"
+              (label :class "iconram"
+                     :text "﬙"
+              )
+              (scale :min 0
+                     :max 100
+                     :value {EWW_RAM["used_mem_perc"]}
+                     :active "false"
+              )
+            )
+            (box :class "bat_bar"
+                 :orientation "h"
+                 :spacing 20
+                 :space-evenly "false"
+                 :vexpand "false"
+                 :hexpand "false"
+              (label :class "iconbat"
+                     :text "󱈑"
+              )
+              (scale  :min 0
+                      :max 100
+                      :value {EWW_BATTERY["total_avg"]}
+                      :active "false"
+              )
+            )
+            (box :class "hdd_bar"
+                 :orientation "h"
+                 :spacing 20
+                 :space-evenly "false"
+                 :vexpand "false"
+                 :hexpand "false"
+              (label :class "iconhdd"
+                     :text ""
+              )
+              (scale :min 0
+                     :max 100
+                     :value {EWW_DISK["/"].used_perc}
+                     :active "false"
+              )
+            )
+          )
+        )
+)
+
+;; Fetch
+(defwidget fetch []
+        (box :orientation "v"
+             :class "fetch"
+             :halign "center"
+             :valign "center"
+             :width "200"
+            (box :class "fetch_items"
+                 :orientation "v"
+                 :spacing 10
+                 :halign "center"
+              (label :class "distro"
+                     :halign "start"
+                     :text "󰣇 : ${distro}"
+              )
+              (label :class "shell"
+                     :halign "start"
+                     :text " : ${shell}"
+              )
+              (label :class "uptime"
+                     :halign "start"
+                     :text "󱕌 : ${uptime}"
+              )
+              (label :class "packages"
+                     :halign "start"
+                     :text "󰏗 : ${packages}"
+              )
+              (label :class "wm"
+                     :halign "start"
+                     :text " : ${wm}"
+              )
+            )
+        )
+)
+
+;; Colors
+(defwidget colors []
+        (box :orientation "h"
+             :class "colorbox"
+             :space-evenly "true"
+             :valign "center"
+             :height 75
+             :width 245
+            (box :class "colors1"
+                 :halign "start"
+                   "󰫔"
+            )
+            (box :class "colors2"
+                 :halign "start"
+                   "󰫔"
+            )
+            (box :class "colors3"
+                 :halign "start"
+                   "󰫔"
+            )
+            (box :class "colors4"
+                 :halign "start"
+                   "󰫔"
+            )
+            (box :class "colors5"
+                 :halign "start"
+                   "󰫔"
+            )
+        )
+)
+
+;; Profile
+(defwidget profile []
+        (box :orientation "v"
+             :class "genwin"
+             :space-evenly "false"
+             :spacing 12
+             :valign "center"
+             :halign "center"
+          (box :orientation "h"
+               :class "pfpbg"
+               :halign "center"
+               :valign "center"
+            (box :orientation "h"
+                 :class "pfpbox"
+                 :style "background-image: url('${pfp}')"
+                 :halign "center"
+                 :valign "center"
+            )
+          )
+          (label :class "name"
+                 :halign "center"
+                 :text name
+          )
+          (label :class "username"
+                 :halign "center"
+                 :text "KayCalBee is "
+          )
+          (label :class "username-hostname"
+                 :halign "center"
+                 :text "${username}@${hostname}"
+          )
+          (label :class "machine"
+                 :halign "center"
+                 :text "on a ${machine}"
+          )
+        )
+)
+
+;; PowerB
+(defwidget powerb []
+        (box :orientation "h"
+             :space-evenly "true"
+          (button :class "powerb"
+                  :onclick "systemctl poweroff"
+                  :timeout "60s"
+                  :active "true"
+                  "󰐥"
+          )
+        )
+)
+
+(defwidget powerr []
+        (box :orientation "h"
+             :space-evenly "true"
+            (button :class "powerr"
+                    :onclick "systemctl reboot"
+                    :timeout "60s"
+                    :active "true"
+                    "󰜉"
+            )
+         )
+)
+
+(defwidget powers []
+        (box :orientation "h"
+             :space-evenly "true"
+            (button :class "powers"
+                    :onclick "systemctl suspend"
+                    :timeout "60s"
+                    :active "true"
+                    "󰤄"
+            )
+        )
+)
+
+;;Sliders
+
+;; Volume
+(defwidget volume []
+  (box :orientation "h"
+       :space-evenly "false"
+       :class "vol-sli"
+    (box :class "label-vol-sli"
+         "󰋋"
+    )
+    (scale :min 0
+           :max 100
+           :value {VOL}
+           :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"
+    )
+  )
+)
+;; Brightness
+(defwidget brightness []
+  (box :orientation "h"
+       :space-evenly "false"
+       :class "bri-sli"
+    (box :class "label-bri-sli"
+         "󰃠"
+    )
+    (scale :min 0
+           :max 100
+           :value {BRI}
+           :onchange "brightnessctl s {}%"
+    )
+  )
+)
+
+;;Music
+(defwidget music []
+        (box :class "genwin"
+             :orientation "h"
+             :space-evenly "false"
+             :vexpand "false"
+             :hexpand "false"
+          (box :class "artbox"
+               :orientation "h"
+               :width 200
+               :height 200
+            (box :class "artbg"
+                 :orientation "h"
+                 :width 180
+                 :height 180
+                 :hexpand "true"
+                 :valign "center"
+                 :halign "center"
+                 :style "background-image: url('${COVER}');"
+            )
+          )
+          (box :orientation "v"
+               :class "musbox"
+               :spacing 20
+               :space-evenly "false"
+               :hexpand "true"
+               :halign "center"
+               :valign "end"
+            (label :halign "center"
+                   :class "artist"
+                   :wrap "true"
+                   :text "󰠃 ${DART}"
+            )
+            (label :halign "center"
+                   :class "album"
+                   :wrap "true"
+                   :text "󰀥 ${DALB}"
+            )
+            (label :halign "center"
+                   :class "song"
+                   :wrap "true"
+                   :text "󰎆 ${DSON}"
+            )
+            (box :orientation "h"
+                 :halign "center"
+                 :class "musbtn"
+                 :valign "end"
+                 :hexpand "true"
+                 :spacing 120
+              (button :onclick "playerctl previous" "󰒮"
+              )
+              (button :class "play-pause"
+                      :onclick "playerctl play-pause" "󰐎"
+              )
+              (button :onclick "playerctl next" "󰒭"
+              )
+            )
+          )
+        )
+)
+
+;; DateTimeWeather
+(defwidget clock []
+  (box :orientation "h"
+       :space-evenly "true"
+       :class "clock"
+       :halign "center"
+       :hexpand "true"
+    (box :class "hour"
+         {HOUR}
+    )
+    (box :class "minute"
+         {MIN}
+    )
+  )
+)
+
+;; Calendar
+(defwidget Calendar []
+  (box :orientation "v"
+       :space-evenly "false"
+       :class "genwin"
+    (box :orientation "h"
+         :space-evenly "true"
+         :class "month-year"
+      (box :orientation "h"
+           :space-evenly "false"
+           :class "month"
+           :halign "start"
+           {MONTH}
+      )
+      (box :orientation "h"
+           :space-evenly "false"
+           :class "year"
+           :halign "end"
+           {YEAR}
+      )
+    )
+    (box :orientation "h"
+         :class "underline"
+    )
+    (box :orientation "h"
+         :class "day"
+         {DAY}
+    )
+    (box :orientation "h"
+         :class "dayof"
+         {DAYOF}
+    )
+  )
+)
+
+;; Launcher
+(defwidget launcher []
+  (box :orientation "v"
+       :class "launchbox"
+       :halign "center"
+       :valign "start"
+       :width 620
+       :height 210
+    (button :class "title"
+         :halign "center"
+         :onclick "~/.config/eww/dash/launch | xdg-open https://duckduckgo.com"
+         "󰜏 Search..."
+    )
+    (box :orientation "h"
+         :halign "start"
+         :space-evenly "true"
+      (button :class "github"
+            :halign "start"
+            :onclick "~/.config/eww/dash/launch | xdg-open https://github.com"
+            :timeout "10s"
+            ""
+      )
+      (button :class "monkeytype"
+            :halign "start"
+            :onclick "~/.config/eww/dash/launch | xdg-open https://monkeytype.com"
+            :timeout "10s"
+            ""
+      )
+      (button :class "link3"
+              :halign "start"
+              :onclick "~/.config/eww/dash/launch | xdg-open https://www.KayCalBee.com"
+              :timeout "10s"
+              "󱒉"
+      )
+      (button :class "link4"
+              :halign "start"
+              :onclick "grimshot --notify save output"
+              "󰹑")
+    )
+  )
+)
+; =====================
+;         WIN
+; =====================
+
+
+;; Background
+(defwindow background :stacking "fg"
+                      :monitor 0
+                      :focusable "false"
+                      :screen 1
+                      :geometry (geometry :x 0
+                                          :y 0
+                                          :width "1920px"
+                                          :height "1080px")
+(bg))
+
+;; Fetch
+(defwindow fetch :stacking "fg"
+                 :monitor 0
+                 :focusable "false"
+                 :screen 1
+                 :geometry (geometry :x 1305
+                                     :y 305
+                                     :width 245
+                                     :height 250
+                            )
+(fetch))
+
+;; Profile
+(defwindow profile :stacking "fg"
+                   :monitor 0
+                   :focusable "false"
+                   :screen 1
+                   :geometry (geometry :x 365
+                                       :y 220
+                                       :width 300
+                                       :height 420
+                              )
+(profile))
+
+;; PowerB
+(defwindow pr :stacking "fg"
+              :monitor 0
+              :focusable "false"
+              :screen 1
+              :geometry (geometry :x 1475
+                                  :y 220
+                                  :width 75
+                                  :height 75
+                        )
+(powerr))
+
+;; PowerS
+(defwindow ps :stacking "fg"
+              :monitor 0
+              :focusable "false"
+              :screen 1
+              :geometry (geometry :x 1305
+                                  :y 220
+                                  :width 75
+                                  :height 75
+                        )
+(powers))
+
+;; PowerR
+(defwindow pb :stacking "fg"
+              :monitor 0
+              :focusable "false"
+              :screen 1
+              :geometry (geometry :x 1390
+                                  :y 220
+                                  :width 75
+                                  :height 75
+                        )
+(powerb))
+
+;; Colors
+(defwindow colors :stacking "fg"
+                  :monitor 0
+                  :focusable "false"
+                  :screen 1
+                  :geometry (geometry :x 1305
+                                      :y 565
+                                      :width 245
+                                      :height 75
+                            )
+(colors))
+
+;; System
+(defwindow system :stacking "fg"
+                  :monitor 0
+                  :focusable "false"
+                  :screen 1
+                  :geometry (geometry :x 1305
+                                      :y 650
+                                      :width 245
+                                      :height 210
+                            )
+(system))
+
+;; Brightness
+(defwindow brightness :stacking "fg"
+                  :monitor 0
+                  :focusable "false"
+                  :screen 1
+                  :geometry (geometry :x 675
+                                      :y 220
+                                      :width 310
+                                      :height 75
+                            )
+(brightness))
+
+;; Volume
+(defwindow volume :stacking "fg"
+                  :monitor 0
+                  :focusable "false"
+                  :screen 1
+                  :geometry (geometry :x 995
+                                      :y 220
+                                      :width 300
+                                      :height 75
+                            )
+(volume))
+
+;; Now Playing
+(defwindow music :stacking "fg"
+                 :monitor 0
+                 :focusable "false"
+                 :screen 1
+                 :geometry (geometry :x 675
+                                     :y 305
+                                     :width 620
+                                     :height 250
+                            )
+(music))
+
+;; Launcher
+(defwindow launcher :stacking "fg"
+                 :monitor 0
+                 :focusable "false"
+                 :screen 1
+                 :geometry (geometry :x 365
+                                     :y 650
+                                     :width 620
+                                     :height 210
+                            )
+(launcher))
+
+;; Calendar
+(defwindow calendar :stacking "fg"
+                    :monitor 0
+                    :focusable "false"
+                    :screen 1
+                    :geometry (geometry :x 995
+                                        :y 565
+                                        :width 300
+                                        :height 295
+                              )
+(Calendar))
+
+;; Button1
+(defwindow but1 :stacking "fg"
+                :monitor 0
+                :focusable "false"
+                :screen 1
+                :geometry (geometry :x 675
+                                    :y 565
+                                    :width 150
+                                    :height 75
+                          )
+(clock))
+
+;; Clock
+(defwindow time :stacking "fg"
+                :monitor 0
+                :focusable "false"
+                :screen 1
+                :geometry (geometry :x 835
+                                    :y 565
+                                    :width 150
+                                    :height 75
+                          )
+(clock))

@@ -1,0 +1,138 @@
+;; ===========
+;;     VAR
+;; ===========
+
+;; Window Title
+(deflisten WINT :initial "..." "~/.config/eww/scripts/get-window-title")
+
+;; Now Playing
+(deflisten BSONG :inital "..." "~/.config/eww/scripts/bar_scroll")
+
+;; BlueTooth
+(deflisten BLTH :initial "..." "rofi-bluetooth --status")
+;; ===========
+;;     WID
+;; ===========
+
+;; Background
+(defwidget barbg []
+  (box :class "barbg")
+)
+
+;; Side Menu
+(defwidget sidemenu []
+  (box :class "sidemenubg"
+    (button :class "sidemenu"
+            :onclick "~/.config/eww/dash/launch"
+            :halign "center"
+            :valign "center"
+            "󰮫"
+    )
+  )
+)
+
+;; SysMenu
+(defwidget sysmenu []
+  (box :class "sysmenubg"
+       :space-evenly "false"
+       :spacing 16
+    (box :class "barmus"
+         :space-evenly "false"
+         :spacing 16
+    (label  :halign "start"
+            :text "  ${BSONG}")
+    (button :onclick "playerctl previous"
+            "󰙣")
+    (button :onclick "playerctl play-pause"
+            "󰐎")
+    (button :onclick "playerctl next"
+            "󰙡"))
+    (box :class "barup"
+         :halign "end"
+         :spacing 20
+      (button :class "barbt"
+              :onclick "pkill rofi | kitty -T 'BlueTooth' -e 'rofi-bluetooth' &"
+              ""
+      )
+      (button :class "barwifi"
+              :onclick "pkill rofi | kitty -T 'WiFi' -e 'networkmanager_dmenu' &"
+              ""
+      )
+    )
+    (box :class "barclock"
+         :halign "end"
+        "  ${HOUR}:${MIN}")
+  )
+)
+
+;; Power Button
+(defwidget powbut []
+  (box :class "powbutbg"
+    (button :class "powbut"
+            :halign "center"
+            :valign "center"
+            :onclick "pkill rofi || rofi -config ~/.config/rofi/pmenu/config.rasi -show power-menu -modi power-menu:/home/kcalb/.local/bin/rofi-power-menu &"
+            "⏼"
+    )
+  )
+)
+
+;; ===========
+;;     WIN
+;; ===========
+
+;; Background
+(defwindow barbg
+        :monitor 0
+        :geometry (geometry :x 0
+                            :y 0
+                            :width "100%"
+                            :height 30
+                            :anchor "top center"
+                  )
+        :stacking "bg"
+        :exclusive false
+        :focusable false
+(barbg))
+
+;; Side Menu
+(defwindow sidemenu
+        :monitor 0
+        :geometry (geometry :x 0
+                            :y 0
+                            :width 40
+                            :height 20
+                            :anchor "top left"
+                  )
+        :stacking "fg"
+        :exclusive false
+        :focusable false
+(sidemenu))
+
+;; SysMenu
+(defwindow sysmenu
+        :monitor 0
+        :geometry (geometry :x 50
+                            :y 0
+                            :width 280
+                            :height 20
+                            :anchor "top right"
+                  )
+        :stacking "fg"
+        :exclusive "false"
+        :focusable "false"
+(sysmenu))
+
+;; Power Button
+(defwindow powbut
+        :monitor 0
+        :geometry (geometry :x 0
+                            :y 0
+                            :width 40
+                            :height 20
+                            :anchor "top right"
+                  )
+        :stacking "fg"
+        :exclusive "false"
+        :focusable "false"
+(powbut))

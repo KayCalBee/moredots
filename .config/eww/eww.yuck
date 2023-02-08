@@ -1,0 +1,75 @@
+(defwindow workspace
+            :monitor 0
+            :geometry (geometry :x 60
+                                :y 0
+                                :width "250px"
+                                :height 20
+                                :anchor "top left"
+                      )
+            :stacking "fg"
+            :exclusive false
+            :focusable false
+  (workspaces)
+)
+
+(deflisten workspaces
+            :initial "[]" "bash ~/.config/eww/scripts/get-workspaces"
+)
+
+(deflisten current_workspace
+            :initial "1" "bash ~/.config/eww/scripts/get-active-workspace"
+)
+
+(defwidget workspaces []
+            (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
+                      :class "workspaces-widget"
+              (box :class "workspaces"
+                   :space-evenly true
+                   :valign "center"
+                   :halign "center"
+                   :height 20
+                (for workspace in workspaces
+                  (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+                    (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+                      (label :text "${workspace.id}")
+                    )
+                  )
+                )
+              )
+  )
+)
+
+(defwindow wint
+            :monitor 0
+            :geometry (geometry :x "0"
+                                :y "0"
+                                :width "100%"
+                                :height 20
+                                :anchor "top center"
+                      )
+            :stacking "fg"
+            :exclusive false
+            :focusable false
+  (wint)
+)
+
+
+(deflisten wint
+            :initial "..." "bash ~/.config/eww/scripts/get-window-title"
+)
+
+(defwidget wint []
+            (box :class "bar"
+                 :halign "center"
+                 :valign "center"
+                 :height 20
+              (label :text "${wint}"
+                     :limit-width 50
+                     :show_truncated true
+              )
+            )
+)
+
+(include "./dash/dash.yuck")
+(include "./bar/bar.yuck")
+(include "./lock/lock.yuck")

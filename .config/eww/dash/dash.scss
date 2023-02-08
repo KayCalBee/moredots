@@ -1,0 +1,399 @@
+.genwin {
+  background-color: $bg;
+}
+
+/* Background */
+
+.bg {
+  all: unset;
+  background-image: url("/home/kcalb/pictures/papes/cute.png");
+  background-color: $bglighter;
+  opacity: 0.7;
+}
+
+/* Fetch */
+.fetch {
+  background-color: $bg;
+}
+
+.fetch_items {
+  font-size: 24px;
+}
+
+.distro {
+  color: $color1;
+}
+
+.shell {
+  color: $color2;
+}
+
+.uptime {
+  color: $color3;
+}
+
+.packages {
+  color: $color4;
+}
+
+.wm {
+  color: $color5;
+}
+
+/* Profile */
+.profile {
+  background-color: $bg;
+}
+
+.music {
+  background-color: $bg;
+}
+
+.name {
+  color: $color1;
+  font-size: 32px;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.pfpbg {
+  border-radius: 24px;
+  background-size: 170px;
+  background-color: $color3;
+  min-width: 170px;
+  min-height: 170px;
+  margin-top: 20px;
+}
+
+.pfpbox {
+  border-radius: 16px;
+  background-size: 160px;
+  min-width: 160px;
+  min-height: 160px;
+  margin: 10px;
+}
+
+.username {
+  color: $color2;
+  font-size: 24px;
+}
+
+.username-hostname {
+  padding: 4px;
+  color: $color3;
+  font-size: 18px;
+}
+
+.machine {
+  color: $color4;
+  font-size: 20px;
+}
+
+/* System */
+
+.iconcpu,
+.iconram,
+.iconhdd,
+.iconbat {
+  font-size: 24px;
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+.iconcpu {
+  color: $color1;
+}
+
+.iconram {
+  color: $color2;
+}
+
+.iconhdd {
+  color: $color5;
+}
+
+.iconbat {
+  color: $color4;
+}
+
+.cpu_bar scale trough,
+.ram_bar scale trough,
+.hdd_bar scale trough,
+.bat_bar scale trough {
+  all: unset;
+  margin: 0px 6px 0px 6px;
+  background-color: $bglighter;
+  border-radius: 40px;
+  min-height: 12px;
+  min-width: 150px;
+}
+
+.cpu_bar scale trough highlight,
+.ram_bar scale trough highlight,
+.hdd_bar scale trough highlight,
+.bat_bar scale trough highlight {
+  all: unset;
+  border-radius: 40px;
+}
+
+.cpu_bar scale trough highlight {
+  background-color: $color1;
+}
+
+.ram_bar scale trough highlight {
+  background-color: $color2;
+}
+
+.hdd_bar scale trough highlight {
+  background-color: $color5;
+}
+
+.bat_bar scale trough highlight {
+  background-color: $color4;
+}
+
+/* Music */
+
+.artbox {
+  background-size: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  border-radius: 14px;
+  background-color: $color3;
+  margin: 20px 0px 20px 20px;
+}
+
+.artbg {
+  background-size: 180px;
+  background-repeat: no-repeat;
+  min-width: 180px;
+  min-height: 180px;
+  border-radius: 8px;
+  margin: 10px 16px;
+}
+
+.musbox {
+  all: unset;
+  background-color: $bg;
+  border-radius: 24px;
+  margin: 20px;
+}
+
+.song {
+  color: $color5;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.artist {
+  color: $color1;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.album {
+  color: $color2;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.musbtn button {
+  color: $color4;
+  font-size: 42px;
+}
+
+button:hover {
+  color: $bglight;
+}
+
+/* ColorsBox */
+
+.colorbox {
+  background-color: $bg;
+  border-radius: 24px;
+  font-size: 30px;
+}
+
+.colors1 {
+  color: $color1;
+  padding-left: 14px;
+}
+
+.colors2 {
+  color: $color2;
+  padding-left: 14px;
+}
+
+.colors3 {
+  color: $color3;
+  padding-left: 14px;
+}
+
+.colors4 {
+  color: $color4;
+  padding-left: 14px;
+}
+
+.colors5 {
+  color: $color5;
+  padding-left: 10px;
+}
+
+/* Power Buttons */
+
+.powerb,
+.powerr,
+.powers {
+  background-color: $bg;
+  font-size: 44px;
+  padding: 0px 24px 0px 20px;
+}
+
+.powerb {
+  color: $color2;
+}
+
+.powerr {
+  color: $color1;
+}
+
+.powers {
+  color: $color3;
+}
+
+/* Sliders */
+
+.vol-sli,
+.bri-sli {
+  background-color: $bg;
+}
+
+.label-vol-sli,
+.label-bri-sli {
+  font-size: 32px;
+  padding: 0px 20px;
+}
+
+.label-vol-sli {
+  color: $color4;
+}
+
+.label-bri-sli {
+  color: $color5;
+  padding-right: 24px;
+}
+
+.vol-sli scale trough,
+.bri-sli scale trough {
+  all: unset;
+  background-color: $bglighter;
+  border-radius: 40px;
+  min-height: 10px;
+  min-width: 220px;
+}
+
+.vol-sli scale trough highlight {
+  all: unset;
+  background-color: $color4;
+  border-radius: 10px;
+}
+
+.bri-sli scale trough highlight {
+  all: unset;
+  background-color: $color5;
+  border-radius: 10px;
+}
+
+.clock {
+  background-color: $bg;
+}
+
+.hour,
+.minute {
+  font-size: 52px;
+  font-weight: bold;
+}
+
+.hour {
+  color: $color3;
+  padding: 08px 6px 08px 16px;
+}
+
+.minute {
+  color: $color2;
+  padding: 08px 16px 08px 6px;
+}
+
+.month-year {
+  font-size: 52px;
+  font-weight: bold;
+  padding-top: 08px;
+}
+
+.month {
+  padding-left: 20px;
+  color: $color3;
+}
+
+.year {
+  padding-right: 20px;
+  color: $color2;
+}
+
+.underline {
+  border-radius: 40px;
+  background-color: $color2;
+  min-height: 10px;
+  margin: 12px 12px 0px 12px;
+}
+
+.day {
+  color: $color4;
+  font-size: 128px;
+  font-weight: bold;
+}
+
+.dayof {
+  color: $color5;
+  font-size: 52px;
+  font-weight: bold;
+}
+
+.launchbox {
+  all: unset;
+  background: $bg;
+  border-radius: 24px;
+}
+
+.title {
+  font-size: 32px;
+  color: $color1;
+  background-color: $bglighter;
+  min-width: 480px;
+  padding: 10px;
+  margin: 20px 40px;
+}
+
+.github {
+  color: $color2;
+  font-size: 64px;
+  margin: 0px 60px;
+}
+
+.monkeytype {
+  color: $color3;
+  font-size: 64px;
+  margin: 0px 40px;
+}
+
+.link3 {
+  color: $color4;
+  font-size: 64px;
+  margin: 0px 40px;
+}
+
+.link4 {
+  color: $color5;
+  font-size: 50px;
+  margin: 0px 40px;
+}

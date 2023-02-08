@@ -1,0 +1,10 @@
+#!/bin/sh
+
+function get_vol {
+    wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}'
+  }
+
+vol=`get_vol`
+volume=$(echo $vol*100 | bc)
+
+echo $volume

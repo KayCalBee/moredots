@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while true
+do
+  playerctl --follow metadata mpris:artUrl |
+  while read arturl; do
+    curl -s $arturl -o /tmp/cover.png
+    echo "/tmp/cover.png"
+  done
+done
